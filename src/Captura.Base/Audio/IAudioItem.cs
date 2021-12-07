@@ -7,5 +7,7 @@ namespace Captura.Models
         string Name { get; }
 
         bool Active { get; set; }
+
+        bool Default { get; }
     }
 }

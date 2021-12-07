@@ -4,13 +4,15 @@
     {
         public int Id { get; }
 
-        public BassItem(int Id, string Name)
+        public BassItem(int Id, string Name, bool Default)
         {
             this.Id = Id;
             this.Name = Name;
+            this.Default = Default;
         }
 
         public string Name { get; }
+        public bool Default { get; }
 
         bool _active;
 

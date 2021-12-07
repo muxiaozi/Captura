@@ -323,13 +323,37 @@ namespace Captura
         {
             var source = ViewModel.AudioSource;
 
-            if (StartOptions.Microphone != -1 && StartOptions.Microphone < source.AvailableRecordingSources.Count)
+            if (StartOptions.Microphone == -2)
+            {
+                ViewModel.Settings.Audio.Enabled = true;
+                foreach (var s in source.AvailableRecordingSources)
+                {
+                    if (s.Default)
+                    {
+                        s.Active = true;
+                        break;
+                    }
+                }
+            }
+            else if (StartOptions.Microphone != -1 && StartOptions.Microphone < source.AvailableRecordingSources.Count)
             {
                 ViewModel.Settings.Audio.Enabled = true;
                 source.AvailableRecordingSources[StartOptions.Microphone].Active = true;
             }
 
-            if (StartOptions.Speaker != -1 && StartOptions.Speaker < source.AvailableLoopbackSources.Count)
+            if (StartOptions.Speaker == -2)
+            {
+                ViewModel.Settings.Audio.Enabled = true;
+                foreach (var s in source.AvailableLoopbackSources)
+                {
+                    if (s.Default)
+                    {
+                        s.Active = true;
+                        break;
+                    }
+                }
+            }
+            else if (StartOptions.Speaker != -1 && StartOptions.Speaker < source.AvailableLoopbackSources.Count)
             {
                 ViewModel.Settings.Audio.Enabled = true;
                 source.AvailableLoopbackSources[StartOptions.Speaker].Active = true;

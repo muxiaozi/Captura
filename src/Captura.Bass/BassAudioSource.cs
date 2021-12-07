@@ -54,11 +54,20 @@ namespace Captura.Models
 
         protected override void OnRefresh()
         {
+            string defaultLoopbackName = null;
+            for (var i = 1; Bass.GetDeviceInfo(i, out var info); ++i)
+            {
+                if (info.Type != 0 && info.IsDefault)
+                {
+                    defaultLoopbackName = info.Name;
+                    break;
+                }
+            }
             for (var i = 0; Bass.RecordGetDeviceInfo(i, out var info); ++i)
             {
                 if (info.IsLoopback)
-                    LoopbackSources.Add(new BassItem(i, info.Name));
-                else RecordingSources.Add(new BassItem(i, info.Name));
+                    LoopbackSources.Add(new BassItem(i, info.Name, info.Name == defaultLoopbackName));
+                else RecordingSources.Add(new BassItem(i, info.Name, info.IsDefault));
             }
         }
 

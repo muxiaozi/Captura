@@ -63,7 +63,7 @@ namespace Captura
                         vm.Settings.Elapsed = dummySettings.Elapsed;
 
                         // FFmpeg Path
-                        vm.Settings.FFmpeg.FolderPath = dummySettings.FFmpeg.FolderPath;
+                        vm.Settings.FFmpeg.FolderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
                         foreach (var overlay in dummySettings.Censored)
                         {
